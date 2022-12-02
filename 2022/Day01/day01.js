@@ -26,27 +26,19 @@ let problemTwo = () => {
   const data = readFileSync('./Day01/input.txt', 'utf-8').split(/\n/);
 
   let current = 0;
-  let topThree = [];
+  let topThree = [0, 0, 0];
   for (let i = 0; i < data.length; i++) {
     if (data[i] != '') {
       current += parseInt(data[i]);
     } else {
-      if (topThree.length < 3) {
-        topThree.push(current);
-      } else {
-        if (topThree.length === 3) {
-          topThree.sort((a,b) => a - b);
-        }
-        if (topThree[0] < current) {
-          topThree.shift();
+      if (topThree[2] < current) {
           topThree.push(current);
-        }
+          topThree.sort((a,b) => b - a);
+          topThree[3] = 0;
       }
       current = 0;
     }
   }
-
-  console.log('Top Three: ', topThree);
 
   return topThree.reduce((acc, curr) => acc + curr, 0);
 

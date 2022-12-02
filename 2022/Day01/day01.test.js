@@ -1,9 +1,9 @@
 const { problemOne, problemTwo } = require('./day01.js');
 
 test('Day01_Problem01', () => {
-  console.log(problemOne());
+  expect(problemOne()).toStrictEqual(72240);
 });
 
 test('Day01_Problem02', () => {
-  console.log(problemTwo());
+  expect(problemTwo()).toStrictEqual(210957);
 });
