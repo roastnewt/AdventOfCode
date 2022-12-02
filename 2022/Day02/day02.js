@@ -37,7 +37,6 @@ let problemOne = () => {
         }
         break;
     }
-
   }
 
   return score;
@@ -46,7 +45,59 @@ let problemOne = () => {
 
 let problemTwo = () => {
 
-  return null;
+  const data = readFileSync('./Day02/input.txt', 'utf-8').split(/\n/);
+
+  let score = 0;
+
+  for (let i = 0; i < data.length; ++i) {
+
+    let opponent = data[i][0];
+    let win = data[i][2];
+
+    switch(opponent) {
+      case 'A':
+        switch (win) {
+          case 'X':
+            score += 3;  //play scissors, lose
+            break;
+          case 'Y':
+            score += 4; // play rock, tie
+            break;
+          case 'Z':
+            score += 8; // play paper, win
+            break;
+        }
+        break;
+      case 'B':
+        switch (win) {
+          case 'X':
+            score += 1;  //play rock, lose
+            break;
+          case 'Y':
+            score += 5; // play paper, tie
+            break;
+          case 'Z':
+            score += 9; // play scissors, win
+            break;
+        }
+        break;
+      case 'C':
+        switch (win) {
+          case 'X':
+            score += 2;  //play paper, lose
+            break;
+          case 'Y':
+            score += 6; // play scissors, tie
+            break;
+          case 'Z':
+            score += 7; // play rock, win
+            break;
+        }
+        break;
+    }
+  }
+
+  return score;
 
 }
 

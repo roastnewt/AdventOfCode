@@ -5,5 +5,5 @@ test('Day01_Problem01', () => {
 });
 
 test('Day01_Problem02', () => {
-  expect(problemTwo()).toStrictEqual(null);
+  expect(problemTwo()).toStrictEqual(15442);
 });
