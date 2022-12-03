@@ -36,8 +36,6 @@ let problemOne = () => {
     let firstPocket = data[i].slice(0, (data[i].length / 2));
     let secondPocket = data[i].slice(data[i].length / 2);
 
-    console.log(firstPocket + " : " + secondPocket);
-
     let seenItems = {};
     for (let j = 0; j < firstPocket.length; j++) {
       recordItem(seenItems, firstPocket[j]);
@@ -54,7 +52,6 @@ let problemOne = () => {
 
     for (character in duplicatedItems) {
       if (duplicatedItems[character] > 0) {
-        console.log(`character ${character} priority ${getPriority(character)}`)
         priorities += getPriority(character); //* duplicatedItems[character];  <-- this is some BS
       }
     }
@@ -67,11 +64,37 @@ let problemOne = () => {
 
 let problemTwo = () => {
 
-  const data = readFileSync('./Day02/input.txt', 'utf-8').split(/\n/);
+  const data = readFileSync('./Day03/input.txt', 'utf-8').split(/\n/);
 
-  for (let i = 0; i < data.length; ++i) {}
+  let priorities = 0;
 
-  return null;
+  for (let i = 0; i < data.length; i += 3) {
+
+    if (data[i].length === 0) continue;
+    let seenItems = {};
+    for (let j = 0; j < data[i].length; j++) {
+      seenItems[data[i][j]] = 1;
+    }
+    for (let j = 0; j < data[i+1].length; j++) {
+      if (seenItems[data[i+1][j]] === 1) {
+        seenItems[data[i+1][j]] = 2;
+      }
+    }
+    for (let j = 0; j < data[i+2].length; j++) {
+      if (seenItems[data[i+2][j]] === 2) {
+        seenItems[data[i+2][j]] = 3;
+      }
+    }
+
+    for (item in seenItems) {
+      if (seenItems[item] === 3) {
+        priorities += getPriority(item);
+      }
+    }
+
+  }
+
+  return priorities;
 
 }
 
