@@ -97,7 +97,26 @@ let problemOne = () => {
 
 let problemTwo = () => {
 
-  return null;
+  problemOne();
+
+  let currentSize = 0;
+  for (let i = 0; i < sizes.length; i++) {
+    if (sizes[i].name === '/') {
+      currentSize = sizes[i].size;
+    }
+  }
+
+  let currentFreeSpace = 70000000 - currentSize;
+  let neededFreeSpace = 30000000 - currentFreeSpace;
+
+  let closest = 70000000;
+  for (let i = 0; i < sizes.length; i++) {
+    if (sizes[i].size >= neededFreeSpace && sizes[i].size < closest) {
+      closest = sizes[i].size;
+    }
+  }
+
+  return closest;
 
 }
 
