@@ -1,6 +1,6 @@
 const {readFileSync} = require('fs');
 
-let problemOne = () => {
+let problemOne = (length = 4) => {
 
   let data = readFileSync('./Day06/input.txt', 'utf-8').split(/\n/);
   data = data[0].split('');
@@ -9,7 +9,7 @@ let problemOne = () => {
   let back = 0;
   let code = [data[back]];
 
-  while (front - back < 4) {
+  while (front - back < length) {
     if (code.includes(data[front])) {
       while (code.includes(data[front])) {
         code.shift();
@@ -28,7 +28,7 @@ let problemTwo = () => {
 
   const data = readFileSync('./Day06/input.txt', 'utf-8').split(/\n/);
 
-  return null;
+  return problemOne(14);
 
 }
 
