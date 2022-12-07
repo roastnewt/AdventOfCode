@@ -26,8 +26,6 @@ let problemOne = (length = 4) => {
 
 let problemTwo = () => {
 
-  const data = readFileSync('./Day06/input.txt', 'utf-8').split(/\n/);
-
   return problemOne(14);
 
 }
