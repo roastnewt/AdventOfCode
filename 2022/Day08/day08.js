@@ -201,9 +201,6 @@ let problemTwo = () => {
 
   return max;
 
-  // 470400 too low
-  // 562275 too high
-
 }
 
 module.exports = {problemOne, problemTwo};
