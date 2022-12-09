@@ -111,7 +111,98 @@ let problemTwo = () => {
 
   let data = readFileSync('./Day08/input.txt', 'utf-8').split(/\n/);
 
-  return null;
+  let grid = buildGrid(data);
+
+  // check up
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (i === 0) {  // mark edges as visible
+        grid[i][j].visibleUp = 0;
+        continue;
+      }
+      grid[i][j].visibleUp = 0;
+      for (let k = i - 1; k >= 0; k--) {
+        if (grid[i][j].height > grid[k][j].height) {
+          grid[i][j].visibleUp++;
+        } else {
+          grid[i][j].visibleUp++;
+          break;
+        }
+      }
+    }
+  }
+
+  // check left
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (j === 0) {  // mark edges as visible
+        grid[i][j].visibleLeft = 0;
+        continue;
+      }
+      grid[i][j].visibleLeft = 0;
+      for (let k = j - 1; k >= 0; k--) {
+        if (grid[i][j].height > grid[i][k].height) {
+          grid[i][j].visibleLeft++;
+        } else {
+          grid[i][j].visibleLeft++;
+          break;
+        }
+      }
+    }
+  }
+
+  // check right
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = grid[i].length - 1; j >= 0; j--) {
+      if (j === grid[i].length - 1) {  // mark edges as visible
+        grid[i][j].visibleRight = 0;
+        continue;
+      }
+      grid[i][j].visibleRight = 0;
+      for (let k = j + 1; k < grid[i].length; k++) {
+        if (grid[i][j].height > grid[i][k].height) {
+          grid[i][j].visibleRight++;
+        } else {
+          grid[i][j].visibleRight++;
+          break;
+        }
+      }
+    }
+  }
+
+  // check down
+  for (let i = grid.length - 1; i >= 0; i--) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (i === grid.length - 1) {  // mark edges as visible
+        grid[i][j].visibleDown = 0;
+        continue;
+      }
+      grid[i][j].visibleDown = 0;
+      for (let k = i + 1; k < grid.length; k++) {
+        if (grid[i][j].height > grid[k][j].height) {
+          grid[i][j].visibleDown++;
+        } else {
+          grid[i][j].visibleDown++;
+          break;
+        }
+      }
+    }
+  }
+
+  let max = 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      let score = grid[i][j].visibleDown * grid[i][j].visibleLeft * grid[i][j].visibleRight * grid[i][j].visibleUp;
+      if (score > max) {
+        max = score;
+      }
+    }
+  }
+
+  return max;
+
+  // 470400 too low
+  // 562275 too high
 
 }
 
