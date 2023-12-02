@@ -1,0 +1,11 @@
+{
+  "name": "2023",
+  "version": "1.0.0",
+  "description": "Advent of Code Problems",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "jest": "^29.3.1"
+  }
+}
