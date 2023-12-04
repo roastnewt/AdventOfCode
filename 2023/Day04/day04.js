@@ -26,9 +26,57 @@ let problemOne = () => {
   return total;
 }
 
+function scoreCards(cards) {
+  
+  let result = [];
+  cards.forEach(line => {
+    let score = 0;
+    console.log(line.winners, line.actual)
+    line.winners.forEach(winner => {
+      if (line.actual.includes(winner)) {
+        score++
+      }
+    })
+    result.push(score)
+  })
+  return result;
+}
+
 let problemTwo = () => {
 
   let data = readFileSync('./Day04/input.txt', 'utf-8').split(/\n/);
+
+  const parsed = data.map(line => {
+    let winners = line.split(':')[1].split('|')[0].trim().split(' ').filter(x => x !== ' ' && x !== '');
+    let actual = line.split('|')[1].trim().split(' ').filter(x => x !== ' ' && x !== '');
+    return {winners, actual};
+  })
+  
+  const scores = scoreCards(parsed);
+  let totalCards = 0;
+  
+  function recurse(cardNumbersToProcess) {
+    if (cardNumbersToProcess.length === 0) return;
+    const nextCardNumbersToProcess = [];
+    cardNumbersToProcess.forEach(cardNumber => {
+        totalCards++;
+        let score = scores[cardNumber];
+        for(let i = 0; i < score; i++) {
+            nextCardNumbersToProcess.push(cardNumber+i+1)
+        }
+    }
+    );
+    recurse(nextCardNumbersToProcess);
+  }
+  
+  const cardNumbersToProcess = [];
+  for (let i = 0; i < scores.length; i++) {
+    cardNumbersToProcess.push(i);
+  }
+    recurse(cardNumbersToProcess);
+  return totalCards;
+  
+  
   
 }
 
