@@ -13,7 +13,6 @@ let problemOne = () => {
   let total = 0;
   parsed.forEach(line => {
     let score = null;
-    console.log(line.winners, line.actual)
     line.winners.forEach(winner => {
       if (line.actual.includes(winner)) {
         score = score ? score*2 : 1;
@@ -31,7 +30,6 @@ function scoreCards(cards) {
   let result = [];
   cards.forEach(line => {
     let score = 0;
-    console.log(line.winners, line.actual)
     line.winners.forEach(winner => {
       if (line.actual.includes(winner)) {
         score++
