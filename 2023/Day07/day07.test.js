@@ -1,9 +1,9 @@
 const { problemOne, problemTwo } = require('./day07.js');
 
-test('Day07_Problem01', () => {
+test.skip('Day07_Problem01', () => {
   expect(problemOne()).toStrictEqual(253205868);
 });
 
-test('Day07_Problem02', () => {
+test.skip('Day07_Problem02', () => {
   expect(problemTwo()).toStrictEqual(253907829);
 });

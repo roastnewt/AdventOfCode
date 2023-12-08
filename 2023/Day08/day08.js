@@ -50,7 +50,39 @@ let problemOne = () => {
 }
 
 let problemTwo = () => {
-  const hands = readFileSync('./Day08/input.txt', 'utf-8').split(/\r\n/);
+  const data = readFileSync('./Day08/input.txt', 'utf-8').split(/\r\n/);
+  const {moves, tree} = parseData(data);
+  const currentNodes = [];
+  const treeNames = Array.from(tree.keys());
+  treeNames.forEach(key => {
+    if (key[2] === 'A') {
+      currentNodes.push(tree.get(key));
+    }
+  });
+  let steps = 0;
+  let found = false;
+  while(!found) {
+    for (let move of moves) {
+      let hasNonZ = false;
+      for (let i = 0; i < currentNodes.length; i++) {
+        if (currentNodes[i].name[2] !== 'Z') {
+          hasNonZ = true;
+        }
+        if (move === 'L') {
+          currentNodes[i] = tree.get(currentNodes[i].left);
+        } else {
+          currentNodes[i] = tree.get(currentNodes[i].right);
+        }
+      }
+      if (!hasNonZ) {
+        found = true;
+        break;
+      }
+      steps++;
+    }
+  }
+  return steps;
+  
   
 }
 
