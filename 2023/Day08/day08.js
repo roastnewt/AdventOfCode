@@ -50,39 +50,85 @@ let problemOne = () => {
 }
 
 let problemTwo = () => {
-  const data = readFileSync('./Day08/input.txt', 'utf-8').split(/\r\n/);
-  const {moves, tree} = parseData(data);
-  const currentNodes = [];
-  const treeNames = Array.from(tree.keys());
-  treeNames.forEach(key => {
-    if (key[2] === 'A') {
-      currentNodes.push(tree.get(key));
+  // const data = readFileSync('./Day08/input.txt', 'utf-8').split(/\r\n/);
+  // const {moves, tree} = parseData(data);
+  // let currentNodes = [];
+  // const treeNames = Array.from(tree.keys());
+  // treeNames.forEach(key => {
+  //   if (key[2] === 'A') {
+  //     currentNodes.push(tree.get(key));
+  //   }
+  // });
+  // console.log(currentNodes);
+  // let steps = 0;
+  // let found = false;
+  // while(!found) {
+  //   for (let move of moves) {
+  //     let hasNonZ = false;
+  //     const nextNodes = [];
+  //     for (const currentNode of currentNodes) {
+  //       if (currentNode.name[2] !== 'Z') {
+  //         hasNonZ = true;
+  //       }
+  //       if (move === 'L') {
+  //         nextNodes.push(tree.get(currentNode.left));
+  //       } else {
+  //         nextNodes.push(tree.get(currentNode.right));
+  //       }
+  //     }
+  //     if (!hasNonZ) {
+  //       found = true;
+  //       break;
+  //     }
+  //     steps++;
+  //     currentNodes = nextNodes;
+  //     console.log(move)
+  //     console.log(currentNodes);
+  //     if (steps > 1000) {
+  //       console.log('too many steps');
+  //       return 0;
+  //     }
+  //   }
+  // }
+  // return steps;
+
+  const fs = require('node:fs');
+  const lcm = require('compute-lcm');
+  let answer = 1;
+  try {
+    const input = fs.readFileSync('./Day08/input.txt', 'utf8');
+    const lines = input.split("\r\n");
+    const lr = lines[0].trim().split("");
+    let camelmap = new Map();
+    let locations = [];
+
+    for(i=2;i<lines.length;i++) {
+      const bits = lines[i].match(/\w{3}/g);
+      camelmap.set(bits[0],[bits[1],bits[2]]);
+      if(bits[0].charAt(2) == 'A') locations.push(bits[0]);
     }
-  });
-  let steps = 0;
-  let found = false;
-  while(!found) {
-    for (let move of moves) {
-      let hasNonZ = false;
-      for (let i = 0; i < currentNodes.length; i++) {
-        if (currentNodes[i].name[2] !== 'Z') {
-          hasNonZ = true;
-        }
-        if (move === 'L') {
-          currentNodes[i] = tree.get(currentNodes[i].left);
-        } else {
-          currentNodes[i] = tree.get(currentNodes[i].right);
-        }
+    console.log(locations);
+
+    let answers = [];
+
+    locations.forEach((loc) => {
+      let i = 0;
+      while(true) {
+        let offset = i % lr.length;
+        let lor = lr[offset];
+        loc = (lor == 'L') ? camelmap.get(loc)[0] : camelmap.get(loc)[1];
+        i++;
+        if(loc.charAt(2) == 'Z') {answers.push(i); break; }
       }
-      if (!hasNonZ) {
-        found = true;
-        break;
-      }
-      steps++;
-    }
+    });
+    console.log(answers);
+    answer = lcm(answers);
   }
-  return steps;
-  
+  catch(e) {
+    console.error(e);
+  }
+
+  return answer
   
 }
 
