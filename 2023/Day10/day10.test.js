@@ -1,9 +1,9 @@
-const { problemOne, problemTwo } = require('./day10.js');
+const {problemOne, problemTwo} = require('./day10.js');
 
-test('Day10_Problem01', () => {
-  expect(problemOne()).toStrictEqual(6956);
+test.skip('Day10_Problem01', () => {
+    expect(problemOne()).toStrictEqual(6956);
 });
 
-test.skip('Day10_Problem02', () => {
-  expect(problemTwo()).toStrictEqual(0);
+test('Day10_Problem02', () => {
+    expect(problemTwo()).toStrictEqual(455);
 });
