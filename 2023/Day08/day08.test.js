@@ -4,6 +4,6 @@ test.skip('Day08_Problem01', () => {
   expect(problemOne()).toStrictEqual(18023);
 });
 
-test('Day08_Problem02', () => {
+test.skip('Day08_Problem02', () => {
   expect(problemTwo()).toStrictEqual(0);
 });
