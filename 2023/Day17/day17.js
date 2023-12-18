@@ -234,7 +234,4 @@ function mapPath(node) {
     return path.map((node) => `[${node.row},${node.col}]`).join(',');
 }
 
-let ans = problemTwo();
-console.log('ans: ', ans)
-
 module.exports = {problemOne, problemTwo};
